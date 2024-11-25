@@ -17,12 +17,30 @@ const onClieckAdd = () => {
     p.className = "todo-item";
     p.innerText = inputText;
 
+    // button(完了)タグ生成
+    const completeButton = document.createElement("button");
+    completeButton.innerText = "完了";
+    // 完了ボタンのクリックイベント付与
+    completeButton.addEventListener("click", () => {
+        alert("完了");
+    });
+
+    // button(削除)タグ生成
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "削除";
+    // 削除ボタンのクリックイベント付与
+    deleteButton.addEventListener("click", () => {
+        alert("削除");
+    });
+
     // liタグの子要素に各要素を追加
     div.appendChild(p);
+    div.appendChild(completeButton);
+    div.appendChild(deleteButton);
     li.appendChild(div);
 
     // コンソールでの確認用
-    console.log(li);
+    console.log(deleteButton);
 
     // liタグの内容を未完了リストに追加
     document.getElementById("incomplete-list").appendChild(li);
