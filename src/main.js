@@ -30,7 +30,9 @@ const onClieckAdd = () => {
     deleteButton.innerText = "削除";
     // 削除ボタンのクリックイベント付与
     deleteButton.addEventListener("click", () => {
-        alert("削除");
+        //　押された削除ボタンの親にあるliタグを未完了リストから削除
+        const deleteTarget = deleteButton.closest("li"); // 一番近い親のliタグを探す
+        document.getElementById("incomplete-list").removeChild(deleteTarget);
     });
 
     // liタグの子要素に各要素を追加
@@ -38,9 +40,6 @@ const onClieckAdd = () => {
     div.appendChild(completeButton);
     div.appendChild(deleteButton);
     li.appendChild(div);
-
-    // コンソールでの確認用
-    console.log(deleteButton);
 
     // liタグの内容を未完了リストに追加
     document.getElementById("incomplete-list").appendChild(li);
