@@ -5,6 +5,13 @@ const onClieckAdd = () => {
     const inputText = document.getElementById("add-text").value;
     document.getElementById("add-text").value = "";
     
+    // 未完了リストに追加
+    createIncompleteTodo(inputText);
+    
+}
+
+// 渡された引数を元に未完了のTODOを作成する関数
+const createIncompleteTodo = (todo) => {
     // li生成
     const li = document.createElement("li");
 
@@ -15,7 +22,7 @@ const onClieckAdd = () => {
     // p生成 class名todo-itemを付与 テストボックスの値を追加
     const p = document.createElement("p");
     p.className = "todo-item";
-    p.innerText = inputText;
+    p.innerText = todo;
 
     // button(完了)タグ生成
     const completeButton = document.createElement("button");
@@ -29,9 +36,18 @@ const onClieckAdd = () => {
         // 戻すボタンを生成してdivタグは以下に設定
         const backButton = document.createElement("button");
         backButton.innerText = "戻る";
-        moveTarget.firstElementChild.appendChild(backButton);
+        backButton.addEventListener("click", () => {
+            // TODOの内容を取得し、未完了リストに追加
+            const todoText = backButton.previousElementSibling.innerText; //戻すボタンの隣のテキストを取得
+            createIncompleteTodo(todoText);
+            //　押された戻すボタンの親になるliタグを削除
+            backButton.closest("li").remove();
+        });
 
+        moveTarget.firstElementChild.appendChild(backButton);
+        // 完了リストに移動
         document.getElementById("complete-list").appendChild(moveTarget);
+
     });
 
     // button(削除)タグ生成
@@ -53,6 +69,8 @@ const onClieckAdd = () => {
     // liタグの内容を未完了リストに追加
     document.getElementById("incomplete-list").appendChild(li);
 }
+
+
 
 // id add-buttonの要素が押された時にonClickAddを実行する
 document.getElementById("add-button").addEventListener("click",onClieckAdd);
