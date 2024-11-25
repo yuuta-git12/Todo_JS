@@ -22,7 +22,16 @@ const onClieckAdd = () => {
     completeButton.innerText = "完了";
     // 完了ボタンのクリックイベント付与
     completeButton.addEventListener("click", () => {
-        alert("完了");
+        // 押された完了ボタンの親になるliタグは以下の完了ボタンと削除ボタンを削除
+        const moveTarget = completeButton.closest("li");
+        completeButton.nextElementSibling.remove();
+        completeButton.remove();
+        // 戻すボタンを生成してdivタグは以下に設定
+        const backButton = document.createElement("button");
+        backButton.innerText = "戻る";
+        moveTarget.firstElementChild.appendChild(backButton);
+
+        document.getElementById("complete-list").appendChild(moveTarget);
     });
 
     // button(削除)タグ生成
